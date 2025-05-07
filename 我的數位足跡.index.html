@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的數位足跡排行榜 - 三星活動</title>
+    <script src="[https://cdn.tailwindcss.com](https://cdn.tailwindcss.com)"></script>
+    <style>
+        /* 自訂樣式 */
+        body {
+            font-family: 'Inter', sans-serif; /* 使用 Inter 字體 */
+            background-color: #f4f7f6; /* 淺灰色背景 */
+            color: #333; /* 深灰色文字 */
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 1000px; /* 最大寬度 */
+            margin: 0 auto; /* 置中 */
+            padding: 1rem; /* 內邊距 */
+        }
+        header {
+            background-color: #0070cc; /* 三星藍 */
+            color: white;
+            padding: 2rem 1rem;
+            text-align: center;
+            border-bottom-left-radius: 15px; /* 圓角 */
+            border-bottom-right-radius: 15px; /* 圓角 */
+        }
+        header h1 {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+         header h2 {
+            font-size: 1.5rem;
+            font-weight: normal;
+            margin-bottom: 1rem;
+        }
+        .logo {
+            max-width: 120px; /* Logo 大小 */
+            margin-bottom: 1rem;
+        }
+        .section {
+            background-color: white;
+            padding: 2rem;
+            margin-top: 1.5rem;
+            border-radius: 15px; /* 圓角 */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 陰影 */
+        }
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+        input[type="text"],
+        input[type="number"] {
+            width: 100%; /* 寬度佔滿 */
+            padding: 0.75rem;
+            border: 1px solid #ccc;
+            border-radius: 8px; /* 圓角 */
+            box-sizing: border-box; /* 包含 padding 和 border */
+        }
+        .time-input input {
+            width: calc(50% - 0.5rem); /* 小時和分鐘各佔一半寬度 */
+            display: inline-block;
+        }
+        .time-input input:first-child {
+            margin-right: 1rem; /* 小時和分鐘之間的間距 */
+        }
+         button[type="submit"] {
+            background-color: #0070cc; /* 三星藍 */
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 8px; /* 圓角 */
+            cursor: pointer;
+            font-size: 1.1rem;
+            transition: background-color 0.3s ease; /* 過渡效果 */
+            width: 100%; /* 寬度佔滿 */
+        }
+        button[type="submit"]:hover {
+            background-color: #005bb5; /* 滑鼠懸停時顏色變深 */
+        }
+        table {
+            width: 100%; /* 寬度佔滿 */
+            border-collapse: collapse; /* 合併邊框 */
+            margin-top: 1.5rem;
+        }
+        th, td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #eee; /* 底部邊框 */
+        }
+        th {
+            background-color: #f2f2f2; /* 表頭背景色 */
+            font-weight: bold;
+        }
+        tbody tr:last-child td {
+            border-bottom: none; /* 最後一行的底部邊框 */
+        }
+        .highlight {
+            background-color: #e0f7fa; /* 提交數據後高亮顯示 */
+        }
+         footer {
+            text-align: center;
+            margin-top: 2rem;
+            padding: 1.5rem 1rem;
+            color: #777; /* 淺灰色文字 */
+            font-size: 0.9rem;
+        }
+        footer a {
+            color: #0070cc; /* 連結顏色 */
+            text-decoration: none;
+        }
+        footer a:hover {
+            text-decoration: underline; /* 滑鼠懸停時加底線 */
+        }
+
+        /* 響應式設計 */
+        @media (min-width: 768px) {
+            .container {
+                padding: 1.5rem;
+            }
+            header h1 {
+                font-size: 2.5rem;
+            }
+             header h2 {
+                font-size: 1.8rem;
+            }
+            .time-input input {
+                width: calc(50% - 0.5rem);
+            }
+             button[type="submit"] {
+                width: auto; /* 在桌面版不佔滿寬度 */
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <img src="[https://placehold.co/120x40/0070cc/white?text=Samsung+Logo](https://placehold.co/120x40/0070cc/white?text=Samsung+Logo)" alt="Samsung Logo" class="logo">
+            <h1>📱 我的數位足跡排行榜</h1>
+            <h2>三星數位健康挑戰賽！🏆</h2>
+            <p>查詢您的三星手機「數位健康」數據，輸入看看您的App使用時間在大家中排名如何！</p>
+            <div class="how-to-find mt-4">
+                <h3 class="text-lg font-semibold mb-2">如何找到您的數據？</h3>
+                <p>前往 **設定** > **數位健康與家長監控**，找到您的「最常用的程式」及其「使用時間」。</p>
+                </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <section class="section input-section">
+                <h3 class="text-xl font-bold mb-4">輸入您的數據</h3>
+                <form id="rankingForm">
+                    <div class="form-group">
+                        <label for="nickname">您的姓名 / 暱稱:</label>
+                        <input type="text" id="nickname" name="nickname" required placeholder="請輸入姓名或暱稱">
+                        <small class="text-gray-500">建議使用暱稱以保護隱私。</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="mostUsedApp">最常用的程式名稱:</label>
+                        <input type="text" id="mostUsedApp" name="mostUsedApp" required placeholder="例如：YouTube, Facebook">
+                    </div>
+                    <div class="form-group">
+                        <label for="usageTimeHours">該程式使用時間:</label>
+                        <div class="time-input flex items-center space-x-2">
+                            <input type="number" id="usageTimeHours" name="usageTimeHours" required min="0" placeholder="小時" class="flex-grow">
+                            <span>小時</span>
+                            <input type="number" id="usageTimeMinutes" name="usageTimeMinutes" required min="0" max="59" placeholder="分鐘" class="flex-grow">
+                            <span>分鐘</span>
+                        </div>
+                        <small class="text-gray-500">請輸入數位健康中顯示的時間，例如：3 小時 45 分鐘。</small>
+                    </div>
+                    <button type="submit">送出並查看排名</button>
+                </form>
+            </section>
+
+            <section class="section leaderboard-section mt-8">
+                <h3 class="text-xl font-bold mb-4">📊 目前排行榜</h3>
+                <p id="loadingStatus" class="text-center text-gray-500" style="display: none;">載入中...</p> <p id="noDataMessage" class="text-center text-gray-500">目前沒有參與者，快來成為第一名吧！</p> <table id="leaderboardTable" class="hidden"> <thead>
+                        <tr>
+                            <th>排名</th>
+                            <th>姓名 / 暱稱</th>
+                            <th>最常用的程式</th>
+                            <th>使用時間</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        </tbody>
+                </table>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 三星門市活動 | <a href="#">隱私權政策</a></p> </div>
+    </footer>
+
+    <script>
+        // JavaScript 邏輯
+        document.addEventListener('DOMContentLoaded', () => {
+            const rankingForm = document.getElementById('rankingForm');
+            const leaderboardTableBody = document.querySelector('#leaderboardTable tbody');
+            const leaderboardTable = document.getElementById('leaderboardTable');
+            const noDataMessage = document.getElementById('noDataMessage');
+            const loadingStatus = document.getElementById('loadingStatus');
+
+            // 在瀏覽器中模擬儲存數據的陣列
+            // 在實際應用中，這裡會是與後端 API 互動來獲取和提交數據
+            let participants = [];
+
+            // 從 localStorage 載入數據 (如果有的話) - 僅用於瀏覽器端模擬持久化
+            // 在實際後端應用中，這裡會從資料庫載入
+            loadParticipants();
+
+            // 渲染排行榜
+            // 確保在頁面載入時就渲染現有的數據
+            renderLeaderboard();
+
+            // 表單提交事件處理
+            rankingForm.addEventListener('submit', (event) => {
+                event.preventDefault(); // 阻止表單默認提交
+
+                // 獲取表單數據
+                const nickname = document.getElementById('nickname').value.trim();
+                const mostUsedApp = document.getElementById('mostUsedApp').value.trim();
+                // 確保將輸入框的值轉換為數字，如果為空則默認為 0
+                const usageTimeHours = parseInt(document.getElementById('usageTimeHours').value, 10) || 0;
+                const usageTimeMinutes = parseInt(document.getElementById('usageTimeMinutes').value, 10) || 0;
+
+                // 簡單驗證
+                if (!nickname || !mostUsedApp) {
+                    alert('請填寫所有必填欄位！');
+                    return;
+                }
+                 if (usageTimeMinutes < 0 || usageTimeMinutes > 59) {
+                    alert('分鐘數請輸入 0 到 59 之間的數字！');
+                    return;
+                }
+
+                // 計算總分鐘數用於排序
+                const totalMinutes = (usageTimeHours * 60) + usageTimeMinutes;
+
+                // 建立參與者物件
+                const newParticipant = {
+                    nickname: nickname,
+                    mostUsedApp: mostUsedApp,
+                    usageTimeHours: usageTimeHours,
+                    usageTimeMinutes: usageTimeMinutes,
+                    totalMinutes: totalMinutes, // 用於排序的總分鐘數
+                    id: Date.now() // 簡單的唯一 ID
+                };
+
+                // 將新參與者添加到陣列
+                participants.push(newParticipant);
+
+                // 在瀏覽器中儲存數據 - 僅用於模擬
+                saveParticipants();
+
+                // 重新渲染排行榜
+                // 確保在添加新數據並儲存後立即重新渲染
+                renderLeaderboard();
+
+                // 清空表單
+                rankingForm.reset();
+
+                // 提交成功提示 (可選)
+                // alert('您的數據已提交！');
+
+                // 滾動到排行榜位置 (可選)
+                document.getElementById('leaderboardTable').scrollIntoView({ behavior: 'smooth' });
+            });
+
+            // 渲染排行榜函數
+            function renderLeaderboard() {
+                // 根據總分鐘數降序排序
+                participants.sort((a, b) => b.totalMinutes - a.totalMinutes);
+
+                // 清空表格 tbody
+                leaderboardTableBody.innerHTML = '';
+
+                if (participants.length === 0) {
+                    // 如果沒有參與者，顯示無數據訊息並隱藏表格
+                    noDataMessage.style.display = 'block';
+                    leaderboardTable.classList.add('hidden');
+                     loadingStatus.style.display = 'none'; // 沒有數據時隱藏載入提示
+                    return;
+                }
+
+                // 如果有參與者，隱藏無數據訊息並顯示表格
+                noDataMessage.style.display = 'none';
+                leaderboardTable.classList.remove('hidden');
+                 loadingStatus.style.display = 'none'; // 數據載入完成，隱藏載入提示
+
+
+                // 遍歷參與者數據，生成表格行
+                participants.forEach((participant, index) => {
+                    const row = leaderboardTableBody.insertRow(); // 插入新行
+
+                    // 添加排名單元格
+                    const rankCell = row.insertCell();
+                    rankCell.textContent = index + 1; // 排名從 1 開始
+
+                    // 添加姓名/暱稱單元格
+                    const nicknameCell = row.insertCell();
+                    nicknameCell.textContent = participant.nickname;
+
+                    // 添加最常用的程式單元格
+                    const appCell = row.insertCell();
+                    appCell.textContent = participant.mostUsedApp;
+
+                    // 添加使用時間單元格
+                    const timeCell = row.insertCell();
+                    timeCell.textContent = `${participant.usageTimeHours} 小時 ${participant.usageTimeMinutes} 分鐘`;
+
+                    // 可選：高亮顯示剛剛提交的行 (需要一個方式識別，這裡簡單用最後提交的)
+                    // 在實際應用中，可以通過後端返回的 ID 來識別
+                    // if (participant.id === lastSubmittedId) { // 假設有一個 lastSubmittedId 變數
+                    //     row.classList.add('highlight');
+                    // }
+                });
+            }
+
+            // 在瀏覽器 localStorage 儲存數據的函數 - 僅用於模擬
+            function saveParticipants() {
+                localStorage.setItem('samsungRankingParticipants', JSON.stringify(participants));
+            }
+
+            // 從瀏覽器 localStorage 載入數據的函數 - 僅用於模擬
+            function loadParticipants() {
+                const savedParticipants = localStorage.getItem('samsungRankingParticipants');
+                if (savedParticipants) {
+                    // 解析儲存的 JSON 數據
+                    participants = JSON.parse(savedParticipants);
+                    // 確保 totalMinutes 屬性存在，因為舊數據可能沒有
+                    participants.forEach(p => {
+                        if (p.totalMinutes === undefined) {
+                             p.totalMinutes = (p.usageTimeHours * 60) + p.usageTimeMinutes;
+                        }
+                    });
+                }
+            }
+
+            // 可選：定時更新排行榜 (如果後端有即時數據更新的話)
+            // setInterval(fetchLeaderboardData, 30000); // 每 30 秒更新一次 (需要後端 API)
+
+            // 在實際後端應用中，您會需要一個函數來從後端 API 獲取數據
+            // function fetchLeaderboardData() {
+            //     loadingStatus.style.display = 'block'; // 顯示載入提示
+            //     fetch('/api/get-ranking') // 替換為您的後端 API 路徑
+            //         .then(response => response.json())
+            //         .then(data => {
+            //             participants = data; // 假設後端返回的是排序好的參與者陣列
+            //             renderLeaderboard();
+            //         })
+            //         .catch(error => {
+            //             console.error('Error fetching leaderboard data:', error);
+            //             // 處理錯誤，例如顯示錯誤訊息
+            //              loadingStatus.textContent = '載入數據失敗';
+            //         });
+            // }
+        });
+    </script>
+
+</body>
+</html>
+```css
+/* 這個 CSS 文件在 HTML 中已經通過 <style> 標籤內嵌，
+   如果您想使用獨立的 style.css 文件，請將 HTML 中的 <style> 內容複製到這裡，
+   並確保 HTML 中的 <link rel="stylesheet" href="style.css"> 指向正確的路徑。
+   由於這裡使用了 Tailwind CSS，自訂樣式主要用於覆蓋或添加 Tailwind 沒有的特定樣式。
+   大部分佈局和基礎樣式已經由 Tailwind class 完成。
+*/
+```javascript
+/* 這個 JavaScript 文件在 HTML 中已經通過 <script> 標籤內嵌。
+   如果您想使用獨立的 script.js 文件，請將 HTML 中的 <script> 內容複製到這裡，
+   並確保 HTML 中的 <script src="script.js"></script> 指向正確的路徑。
+   請注意，這個 JS 程式碼是在瀏覽器端模擬數據處理，
+   實際應用需要一個後端來處理數據的持久儲存和排序。
+*/
