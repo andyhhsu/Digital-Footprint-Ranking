@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>我的數位足跡排行榜 - 三星活動</title>
-    <script src="[https://cdn.tailwindcss.com](https://cdn.tailwindcss.com)"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
         /* 自訂樣式 */
         body {
@@ -36,10 +36,10 @@
             font-weight: normal;
             margin-bottom: 1rem;
         }
-        .logo {
+        /* .logo {
             max-width: 120px; /* Logo 大小 */
-            margin-bottom: 1rem;
-        }
+            /* margin-bottom: 1rem; */
+        /* } */ /* 已移除 Logo，相關樣式可保留或移除 */
         .section {
             background-color: white;
             padding: 2rem;
@@ -143,7 +143,6 @@
 
     <header>
         <div class="container">
-            <img src="[https://placehold.co/120x40/0070cc/white?text=Samsung+Logo](https://placehold.co/120x40/0070cc/white?text=Samsung+Logo)" alt="Samsung Logo" class="logo">
             <h1>📱 我的數位足跡排行榜</h1>
             <h2>三星數位健康挑戰賽！🏆</h2>
             <p>查詢您的三星手機「數位健康」數據，輸入看看您的App使用時間在大家中排名如何！</p>
@@ -213,26 +212,23 @@
             const noDataMessage = document.getElementById('noDataMessage');
             const loadingStatus = document.getElementById('loadingStatus');
 
-            // 在瀏覽器中模擬儲存數據的陣列
-            // 在實際應用中，這裡會是與後端 API 互動來獲取和提交數據
+            // 模擬後端 API 路徑 (這些路徑目前是假的，需要您實際建立後端)
+            const API_SUBMIT_URL = '/api/submit-ranking'; // 提交數據的 API
+            const API_GET_URL = '/api/get-ranking'; // 獲取排行榜數據的 API
+
+            // 在瀏覽器中不再直接儲存參與者數據，而是從後端獲取
             let participants = [];
 
-            // 從 localStorage 載入數據 (如果有的話) - 僅用於瀏覽器端模擬持久化
-            // 在實際後端應用中，這裡會從資料庫載入
-            loadParticipants();
-
-            // 渲染排行榜
-            // 確保在頁面載入時就渲染現有的數據
-            renderLeaderboard();
+            // 頁面載入時，從後端獲取並渲染排行榜
+            fetchLeaderboardData();
 
             // 表單提交事件處理
-            rankingForm.addEventListener('submit', (event) => {
+            rankingForm.addEventListener('submit', async (event) => {
                 event.preventDefault(); // 阻止表單默認提交
 
                 // 獲取表單數據
                 const nickname = document.getElementById('nickname').value.trim();
                 const mostUsedApp = document.getElementById('mostUsedApp').value.trim();
-                // 確保將輸入框的值轉換為數字，如果為空則默認為 0
                 const usageTimeHours = parseInt(document.getElementById('usageTimeHours').value, 10) || 0;
                 const usageTimeMinutes = parseInt(document.getElementById('usageTimeMinutes').value, 10) || 0;
 
@@ -249,39 +245,111 @@
                 // 計算總分鐘數用於排序
                 const totalMinutes = (usageTimeHours * 60) + usageTimeMinutes;
 
-                // 建立參與者物件
-                const newParticipant = {
+                // 建立要提交到後端的數據物件
+                const newParticipantData = {
                     nickname: nickname,
                     mostUsedApp: mostUsedApp,
                     usageTimeHours: usageTimeHours,
                     usageTimeMinutes: usageTimeMinutes,
-                    totalMinutes: totalMinutes, // 用於排序的總分鐘數
-                    id: Date.now() // 簡單的唯一 ID
+                    totalMinutes: totalMinutes // 提交總分鐘數方便後端排序
                 };
 
-                // 將新參與者添加到陣列
-                participants.push(newParticipant);
+                // 顯示載入狀態或禁用按鈕 (可選)
+                // loadingStatus.style.display = 'block';
+                // rankingForm.querySelector('button[type="submit"]').disabled = true;
 
-                // 在瀏覽器中儲存數據 - 僅用於模擬
-                saveParticipants();
 
-                // 重新渲染排行榜
-                // 確保在添加新數據並儲存後立即重新渲染
-                renderLeaderboard();
+                // 模擬將數據發送到後端 API
+                try {
+                    // 在實際應用中，這裡會使用 fetch 或 XMLHttpRequest 發送 POST 請求到後端
+                    // const response = await fetch(API_SUBMIT_URL, {
+                    //     method: 'POST',
+                    //     headers: {
+                    //         'Content-Type': 'application/json'
+                    //     },
+                    //     body: JSON.stringify(newParticipantData)
+                    // });
 
-                // 清空表單
-                rankingForm.reset();
+                    // // 檢查後端響應是否成功
+                    // if (!response.ok) {
+                    //     throw new Error(`HTTP error! status: ${response.status}`);
+                    // }
 
-                // 提交成功提示 (可選)
-                // alert('您的數據已提交！');
+                    // // 模擬後端成功處理並返回更新後的排行榜數據 (實際後端會返回真實數據)
+                    // const updatedRankingData = await response.json();
+                    // participants = updatedRankingData; // 更新前端的參與者數據
 
-                // 滾動到排行榜位置 (可選)
-                document.getElementById('leaderboardTable').scrollIntoView({ behavior: 'smooth' });
+                    // *** 由於沒有實際後端，這裡我們直接在前端模擬數據更新和排序 ***
+                    // 在實際後端應用中，這段模擬代碼需要移除
+                     participants.push(newParticipantData); // 將新數據加到前端陣列 (模擬)
+                    // *** 模擬結束 ***
+
+
+                    // 重新渲染排行榜
+                    renderLeaderboard();
+
+                    // 清空表單
+                    rankingForm.reset();
+
+                    // 提交成功提示 (可選)
+                    // alert('您的數據已提交！');
+
+                    // 滾動到排行榜位置 (可選)
+                    document.getElementById('leaderboardTable').scrollIntoView({ behavior: 'smooth' });
+
+                } catch (error) {
+                    console.error('提交數據失敗:', error);
+                    alert('提交數據失敗，請稍後再試。');
+                    // 顯示錯誤訊息給使用者 (可選)
+                } finally {
+                     // 隱藏載入狀態或啟用按鈕 (可選)
+                    // loadingStatus.style.display = 'none';
+                    // rankingForm.querySelector('button[type="submit"]').disabled = false;
+                }
             });
 
-            // 渲染排行榜函數
+            // 從後端獲取排行榜數據的函數
+            async function fetchLeaderboardData() {
+                loadingStatus.style.display = 'block'; // 顯示載入提示
+                noDataMessage.style.display = 'none'; // 隱藏無數據提示
+                leaderboardTable.classList.add('hidden'); // 隱藏表格
+
+                try {
+                    // 在實際應用中，這裡會使用 fetch 發送 GET 請求到後端
+                    // const response = await fetch(API_GET_URL);
+
+                    // // 檢查後端響應是否成功
+                    // if (!response.ok) {
+                    //     throw new Error(`HTTP error! status: ${response.status}`);
+                    // }
+
+                    // // 獲取後端返回的排行榜數據
+                    // const rankingData = await response.json();
+                    // participants = rankingData; // 更新前端的參與者數據
+
+                    // *** 由於沒有實際後端，這裡我們直接從 localStorage 模擬載入數據 ***
+                    // 在實際後端應用中，這段模擬代碼需要移除
+                    loadParticipantsFromLocalStorage(); // 從 localStorage 載入數據 (模擬)
+                    // *** 模擬結束 ***
+
+
+                    // 渲染排行榜
+                    renderLeaderboard();
+
+                } catch (error) {
+                    console.error('獲取排行榜數據失敗:', error);
+                    // 處理錯誤，例如顯示錯誤訊息
+                    loadingStatus.textContent = '載入數據失敗';
+                    noDataMessage.style.display = 'block'; // 顯示無數據提示
+                } finally {
+                    // 隱藏載入狀態
+                    loadingStatus.style.display = 'none';
+                }
+            }
+
+            // 渲染排行榜函數 (與之前版本相同)
             function renderLeaderboard() {
-                // 根據總分鐘數降序排序
+                 // 根據總分鐘數降序排序
                 participants.sort((a, b) => b.totalMinutes - a.totalMinutes);
 
                 // 清空表格 tbody
@@ -291,14 +359,12 @@
                     // 如果沒有參與者，顯示無數據訊息並隱藏表格
                     noDataMessage.style.display = 'block';
                     leaderboardTable.classList.add('hidden');
-                     loadingStatus.style.display = 'none'; // 沒有數據時隱藏載入提示
                     return;
                 }
 
                 // 如果有參與者，隱藏無數據訊息並顯示表格
                 noDataMessage.style.display = 'none';
                 leaderboardTable.classList.remove('hidden');
-                 loadingStatus.style.display = 'none'; // 數據載入完成，隱藏載入提示
 
 
                 // 遍歷參與者數據，生成表格行
@@ -329,18 +395,13 @@
                 });
             }
 
-            // 在瀏覽器 localStorage 儲存數據的函數 - 僅用於模擬
-            function saveParticipants() {
-                localStorage.setItem('samsungRankingParticipants', JSON.stringify(participants));
-            }
-
-            // 從瀏覽器 localStorage 載入數據的函數 - 僅用於模擬
-            function loadParticipants() {
+             // *** 由於沒有實際後端，這裡保留從 localStorage 載入數據的函數用於模擬初始數據 ***
+             // 在實際後端應用中，這個函數可以移除
+            function loadParticipantsFromLocalStorage() {
                 const savedParticipants = localStorage.getItem('samsungRankingParticipants');
                 if (savedParticipants) {
-                    // 解析儲存的 JSON 數據
                     participants = JSON.parse(savedParticipants);
-                    // 確保 totalMinutes 屬性存在，因為舊數據可能沒有
+                     // 確保 totalMinutes 屬性存在，因為舊數據可能沒有
                     participants.forEach(p => {
                         if (p.totalMinutes === undefined) {
                              p.totalMinutes = (p.usageTimeHours * 60) + p.usageTimeMinutes;
@@ -349,24 +410,15 @@
                 }
             }
 
-            // 可選：定時更新排行榜 (如果後端有即時數據更新的話)
-            // setInterval(fetchLeaderboardData, 30000); // 每 30 秒更新一次 (需要後端 API)
+             // *** 由於沒有實際後端，這裡保留儲存到 localStorage 的函數用於模擬數據提交後的更新 ***
+             // 在實際後端應用中，這個函數可以移除，數據提交後直接從後端重新獲取排行榜數據
+             function saveParticipants() {
+                localStorage.setItem('samsungRankingParticipants', JSON.stringify(participants));
+            }
 
-            // 在實際後端應用中，您會需要一個函數來從後端 API 獲取數據
-            // function fetchLeaderboardData() {
-            //     loadingStatus.style.display = 'block'; // 顯示載入提示
-            //     fetch('/api/get-ranking') // 替換為您的後端 API 路徑
-            //         .then(response => response.json())
-            //         .then(data => {
-            //             participants = data; // 假設後端返回的是排序好的參與者陣列
-            //             renderLeaderboard();
-            //         })
-            //         .catch(error => {
-            //             console.error('Error fetching leaderboard data:', error);
-            //             // 處理錯誤，例如顯示錯誤訊息
-            //              loadingStatus.textContent = '載入數據失敗';
-            //         });
-            // }
+
+            // 可選：定時從後端更新排行榜
+            // setInterval(fetchLeaderboardData, 30000); // 每 30 秒更新一次 (需要後端 API)
         });
     </script>
 
@@ -381,8 +433,6 @@
 */
 ```javascript
 /* 這個 JavaScript 文件在 HTML 中已經通過 <script> 標籤內嵌。
-   如果您想使用獨立的 script.js 文件，請將 HTML 中的 <script> 內容複製到這裡，
-   並確保 HTML 中的 <script src="script.js"></script> 指向正確的路徑。
-   請注意，這個 JS 程式碼是在瀏覽器端模擬數據處理，
+   這個版本包含了與後端 API 互動的架構，但沒有實際的後端實現。
    實際應用需要一個後端來處理數據的持久儲存和排序。
 */
