@@ -119,7 +119,7 @@
 
         <header class="text-center mb-10">
             <h1 class="text-4xl sm:text-5xl font-bold text-transparent bg-clip-text samsung-brand-header-text mb-3">
-                📱 數位足跡排行榜！ 🏆 
+                📱 數位足跡排行榜！ 🏆
             </h1>
             <p class="text-lg sm:text-xl text-gray-700">
                 手機不離身的您，是否好奇自己的App使用時間有多驚人？想知道自己在眾人之中是『數位冠軍』還是『時間管理大師』嗎？快來挑戰吧！
@@ -493,12 +493,18 @@
                 }
 
                 if (result.status === 'success') {
-                    let successMsg = '太棒了！您的數據已成功提交，排行榜即將更新！';
+                    let pageSuccessMsg = '太棒了！您的數據已成功提交，排行榜即將更新！';
                     if (submissionData.agreeToDraw && submissionData.contactInfo) { 
-                        successMsg += ' 您已成功參加抽獎！<br>中獎名單將於7月1日，在「微風南山三星旗艦館」臉書粉絲專頁公佈。祝您幸運中獎！';
+                        pageSuccessMsg += ' 您已成功參加抽獎！'; // 頁面上的簡短提示
                     }
-                    submissionSuccessTextElement.innerHTML = successMsg; 
+                    submissionSuccessTextElement.innerHTML = pageSuccessMsg; 
                     submissionSuccessMessageElement.classList.remove('hidden');
+                    
+                    // 如果同意抽獎並輸入電話，則彈出額外提示
+                    if (submissionData.agreeToDraw && submissionData.contactInfo) {
+                        showAlert('抽獎提醒', '中獎名單將於7月1日，在「微風南山三星旗艦館」臉書粉絲專頁公佈。祝您幸運中獎！');
+                    }
+
                     dataForm.reset(); 
                     sessionStorage.setItem('lastSubmittedNickname', submissionData.nickname); 
                     await fetchLeaderboardData(true); 
