@@ -8,7 +8,7 @@
     <style>
         body { 
             font-family: 'Noto Sans TC', sans-serif; 
-            scroll-behavior: smooth; /* 為了頁面內平滑滾動 */
+            scroll-behavior: smooth; 
         }
         .table-cell-truncate {
             max-width: 100px;
@@ -22,17 +22,17 @@
         }
         /* 按鈕效果 */
         .samsung-brand-button {
-            background-image: linear-gradient(to right, #4A00E0, #8E2DE2); /* 強調的紫色系漸層 */
+            background-image: linear-gradient(to right, #4A00E0, #8E2DE2); 
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-            transition: all 0.2s ease-in-out; /* 統一的過渡效果 */
+            transition: all 0.2s ease-in-out; 
         }
         .samsung-brand-button:hover {
-            background-image: linear-gradient(to right, #3A00B0, #7E1DD2); /* 滑鼠懸停時變深 */
+            background-image: linear-gradient(to right, #3A00B0, #7E1DD2); 
             box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
-            transform: translateY(-2px); /* 輕微上浮 */
+            transform: translateY(-2px); 
         }
         .samsung-brand-button:active { 
-            transform: translateY(0px) scale(0.98); /* 按下時的效果 */
+            transform: translateY(0px) scale(0.98); 
             filter: brightness(0.95); 
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
         }
@@ -63,10 +63,10 @@
         
         /* 抽獎區塊樣式 */
         .draw-section {
-            margin-top: 2rem; /* 增加與上方間距 */
-            padding: 1.25rem; /* 增加內距 */
+            margin-top: 2rem; 
+            padding: 1.25rem; 
             border: 1px dashed #e67e22; 
-            border-radius: 0.75rem; /* 增加圓角 */
+            border-radius: 0.75rem; 
             background-color: #fdf2e9; 
         }
         .draw-section h3 { font-size: 1.2rem; font-weight: 700; color: #d35400; margin-bottom: 0.75rem; } 
@@ -75,7 +75,7 @@
         .draw-section input[type="checkbox"] {
             height: 1.1rem; width: 1.1rem; color: #3498db; 
             border-color: #bdc3c7; border-radius: 0.25rem; 
-            margin-right: 0.6rem; flex-shrink: 0; margin-top: 0.2rem; /* 微調對齊 */
+            margin-right: 0.6rem; flex-shrink: 0; margin-top: 0.2rem; 
         }
         .draw-section .checkbox-label label { font-size: 0.9rem; color: #2c3e50; line-height: 1.5; } 
         .draw-section .contact-label { display: block; font-size: 0.9rem; font-weight: 500; color: #2c3e50; margin-bottom: 0.3rem; }
@@ -90,26 +90,26 @@
         .new-leaderboard-entry { animation: fadeInRow 0.6s ease-out forwards; }
 
         /* 三星品牌色系調整 */
-        .samsung-brand-text { color: #3A00B0; /* 深紫色 */ }
+        .samsung-brand-text { color: #3A00B0; }
         .samsung-brand-header-text { background-image: linear-gradient(to right, #4A00E0, #A855F7); }
 
         /* 表單輸入框焦點樣式 */
         .form-input-focus:focus {
-            border-color: #4A00E0; /* 三星品牌紫色 */
-            box-shadow: 0 0 0 3px rgba(74, 0, 224, 0.25); /* 淡紫色光暈 */
-            outline: none; /* 移除預設 outline */
+            border-color: #4A00E0; 
+            box-shadow: 0 0 0 3px rgba(74, 0, 224, 0.25); 
+            outline: none; 
         }
         /* 表單欄位錯誤訊息樣式 */
         .field-error-message {
-            color: #e74c3c; /* 紅色 */
+            color: #e74c3c; 
             font-size: 0.8rem;
-            margin-top: 0.3rem; /* 增加與輸入框間距 */
+            margin-top: 0.3rem; 
             display: block; 
         }
         /* 排行榜表格隔行變色和 hover 效果 */
-        .leaderboard-table tbody tr:nth-child(even) { background-color: #f9f9f9; /* 更淡的灰色 */ }
-        .leaderboard-table tbody tr:hover { background-color: #eef2ff; /* 淡紫色 hover */ }
-        .my-rank-highlight { background-color: #cce5ff !important; /* 更明顯的淡藍色高亮 */ font-weight: bold; border-left: 3px solid #007bff; }
+        .leaderboard-table tbody tr:nth-child(even) { background-color: #f9f9f9; }
+        .leaderboard-table tbody tr:hover { background-color: #eef2ff; }
+        .my-rank-highlight { background-color: #cce5ff !important; font-weight: bold; border-left: 3px solid #007bff; }
     </style>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
@@ -119,7 +119,7 @@
 
         <header class="text-center mb-10">
             <h1 class="text-4xl sm:text-5xl font-bold text-transparent bg-clip-text samsung-brand-header-text mb-3">
-                📱 數位足跡排行榜：三星數位健康挑戰賽！ 🏆
+                📱 數位足跡排行榜！ 🏆 
             </h1>
             <p class="text-lg sm:text-xl text-gray-700">
                 手機不離身的您，是否好奇自己的App使用時間有多驚人？想知道自己在眾人之中是『數位冠軍』還是『時間管理大師』嗎？快來挑戰吧！
@@ -131,12 +131,8 @@
             <ol class="list-decimal list-inside text-gray-700 space-y-3 text-base">
                 <li>開啟三星手機「<strong class="samsung-brand-text">設定</strong>」。</li>
                 <li>點選「<strong class="samsung-brand-text">數位健康與家長監護</strong>」。</li>
-                <li>
-                    在「您的螢幕總時間」區塊，您可以找到「<strong class="samsung-brand-text">每日平均</strong>」(這通常是過去7天的每日平均，請以此作為您的「每週平均使用時間」)。
-                </li>
-                <li>
-                    下滑或點擊圖表，查看您「<strong class="samsung-brand-text">最常使用的應用程式</strong>」及其各別的「<strong class="samsung-brand-text">使用時間</strong>」。
-                </li>
+                <li>右上角的長條圖⭢週報⭢「<strong class="samsung-brand-text">每日螢幕使用時間</strong>」</li>
+                <li>下滑可以找到「<strong class="samsung-brand-text">最常使用的應用程式</strong>」及其各別的「<strong class="samsung-brand-text">使用時間</strong>」</li>
             </ol>
             <p class="mt-5 text-sm text-gray-600">小提示：確保您查看的是您想分享的時段數據喔！</p>
         </section>
@@ -160,7 +156,7 @@
                     <div class="grid grid-cols-2 gap-5">
                         <div>
                             <label for="avgWeeklyHours" class="block text-sm font-medium text-gray-700 mb-1">小時 <span class="text-red-500">*</span></label>
-                            <input type="number" name="avgWeeklyHours" id="avgWeeklyHours" required min="0" max="168" class="form-input-focus mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none sm:text-sm" placeholder="例如：3">
+                            <input type="number" name="avgWeeklyHours" id="avgWeeklyHours" required min="0" max="24" class="form-input-focus mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none sm:text-sm" placeholder="例如：3">
                             <span id="avgWeeklyHoursError" class="field-error-message hidden"></span>
                         </div>
                         <div>
@@ -172,7 +168,7 @@
                 </fieldset>
 
                 <fieldset class="p-5 border border-gray-300 rounded-lg">
-                    <legend class="text-xl font-medium text-gray-800 px-2">您最常用的程式</legend>
+                    <legend class="text-xl font-medium text-gray-800 px-2">你每週使用最久的程式</legend>
                     <div class="mt-2">
                         <label for="mostUsedApp" class="block text-sm font-medium text-gray-700 mb-1">程式名稱 <span class="text-red-500">*</span></label>
                         <input type="text" name="mostUsedApp" id="mostUsedApp" required class="form-input-focus mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none sm:text-sm" placeholder="例如：YouTube">
@@ -181,7 +177,7 @@
                     <div class="grid grid-cols-2 gap-5 mt-4">
                         <div>
                             <label for="appHours" class="block text-sm font-medium text-gray-700 mb-1">該程式使用時間 (小時) <span class="text-red-500">*</span></label>
-                            <input type="number" name="appHours" id="appHours" required min="0" class="form-input-focus mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none sm:text-sm" placeholder="例如：2">
+                            <input type="number" name="appHours" id="appHours" required min="0" max="168" class="form-input-focus mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none sm:text-sm" placeholder="例如：2">
                             <span id="appHoursError" class="field-error-message hidden"></span>
                         </div>
                         <div>
@@ -201,7 +197,7 @@
                     </div>
                     <div>
                         <label for="contactInfo" class="contact-label">您的手機號碼 (中獎通知用)</label>
-                        <input type="text" name="contactInfo" id="contactInfo" class="form-input-focus mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none sm:text-sm" placeholder="09xxxxxxxx">
+                        <input type="text" name="contactInfo" id="contactInfo" maxlength="10" class="form-input-focus mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none sm:text-sm" placeholder="09xxxxxxxx">
                         <span id="contactInfoError" class="field-error-message hidden"></span>
                     </div>
                     <p class="hint">提示：若未勾選同意或未填寫手機號碼，仍可參與排行榜，但無法參加抽獎喔！</p>
@@ -335,7 +331,7 @@
             }
             if (inputElement) {
                 inputElement.classList.add('border-red-500');
-                inputElement.classList.remove('border-gray-300'); // 確保移除預設邊框色
+                inputElement.classList.remove('border-gray-300'); 
             }
         }
 
@@ -348,7 +344,7 @@
             }
             if (inputElement) {
                 inputElement.classList.remove('border-red-500');
-                inputElement.classList.add('border-gray-300'); // 恢復預設邊框色
+                inputElement.classList.add('border-gray-300'); 
             }
         }
 
@@ -401,14 +397,18 @@
 
             const avgH = parseInt(data.avgWeeklyHours);
             const avgM = parseInt(data.avgWeeklyMinutes);
-            if (data.avgWeeklyHours === '' || data.avgWeeklyMinutes === '' || isNaN(avgH) || isNaN(avgM) || avgH < 0 || avgM < 0 || avgM > 59) {
-                if (data.avgWeeklyHours === '' || isNaN(avgH) || avgH < 0) showFieldError('avgWeeklyHours', '請輸入有效的小時數！');
+            if (data.avgWeeklyHours === '' || data.avgWeeklyMinutes === '' || isNaN(avgH) || isNaN(avgM) || avgH < 0 || avgH > 24 || avgM < 0 || avgM > 59) {
+                if (data.avgWeeklyHours === '' || isNaN(avgH) || avgH < 0 || avgH > 24) showFieldError('avgWeeklyHours', '請輸入有效的小時數 (0-24)！');
                 if (data.avgWeeklyMinutes === '' || isNaN(avgM) || avgM < 0 || avgM > 59) showFieldError('avgWeeklyMinutes', '請輸入有效的分鐘數(0-59)！');
                 isValid = false;
+            } else if ((avgH * 60 + avgM) > (24*60) && !(avgH === 24 && avgM === 0)) { 
+                 showFieldError('avgWeeklyHours', '每日平均使用時間總和不能超過24小時！');
+                 isValid = false;
             } else if ((avgH * 60 + avgM) < 0 && !(avgH === 0 && avgM === 0)) { 
-                 showFieldError('avgWeeklyHours', '每週平均使用時間總和不能為負數！'); // 顯示在第一個相關欄位
+                 showFieldError('avgWeeklyHours', '每週平均使用時間總和不能為負數！');
                  isValid = false;
             }
+
 
             if (!data.mostUsedApp) {
                 showFieldError('mostUsedApp', '請輸入最常用的程式名稱！');
@@ -420,12 +420,12 @@
             
             const appH = parseInt(data.appHours);
             const appM = parseInt(data.appMinutes);
-            if (data.appHours === '' || data.appMinutes === '' || isNaN(appH) || isNaN(appM) || appH < 0 || appM < 0 || appM > 59) {
-                if (data.appHours === '' || isNaN(appH) || appH < 0) showFieldError('appHours', '請輸入有效的小時數！');
+            if (data.appHours === '' || data.appMinutes === '' || isNaN(appH) || isNaN(appM) || appH < 0 || appH > 168 || appM < 0 || appM > 59) { 
+                if (data.appHours === '' || isNaN(appH) || appH < 0 || appH > 168) showFieldError('appHours', '請輸入有效的小時數 (0-168)！');
                 if (data.appMinutes === '' || isNaN(appM) || appM < 0 || appM > 59) showFieldError('appMinutes', '請輸入有效的分鐘數(0-59)！');
                 isValid = false;
             } else if ((appH * 60 + appM) < 0 && !(appH === 0 && appM === 0)) { 
-                 showFieldError('appHours', '程式使用時間總和不能為負數！'); // 顯示在第一個相關欄位
+                 showFieldError('appHours', '程式使用時間總和不能為負數！');
                  isValid = false;
             }
             
@@ -436,8 +436,8 @@
 
             if (data.contactInfo) { 
                 const phoneRegex = /^09\d{8}$/; 
-                if (!phoneRegex.test(data.contactInfo)) {
-                    showFieldError('contactInfo', '請輸入有效的台灣手機號碼格式 (例如：0912345678)！');
+                if (!phoneRegex.test(data.contactInfo) || data.contactInfo.length !== 10) { 
+                    showFieldError('contactInfo', '請輸入有效的10碼台灣手機號碼 (例如：0912345678)！');
                     isValid = false;
                 }
             }
@@ -446,8 +446,6 @@
                 submitButton.disabled = false;
                 submitButton.textContent = '提交挑戰，查看排名！';
                 submitButton.classList.remove('opacity-50', 'cursor-not-allowed');
-                // showAlert('輸入錯誤', '請檢查表單中的紅色提示訊息並修正。'); // 改為僅依賴行內提示
-                // 讓用戶自行查看紅色提示
                 return;
             }
             
@@ -495,10 +493,11 @@
                 }
 
                 if (result.status === 'success') {
-                    submissionSuccessTextElement.textContent = '太棒了！您的數據已成功提交，排行榜即將更新！';
+                    let successMsg = '太棒了！您的數據已成功提交，排行榜即將更新！';
                     if (submissionData.agreeToDraw && submissionData.contactInfo) { 
-                        submissionSuccessTextElement.textContent += ' 您已成功參加抽獎！';
+                        successMsg += ' 您已成功參加抽獎！<br>中獎名單將於7月1日，在「微風南山三星旗艦館」臉書粉絲專頁公佈。祝您幸運中獎！';
                     }
+                    submissionSuccessTextElement.innerHTML = successMsg; 
                     submissionSuccessMessageElement.classList.remove('hidden');
                     dataForm.reset(); 
                     sessionStorage.setItem('lastSubmittedNickname', submissionData.nickname); 
@@ -506,8 +505,8 @@
                     
                     setTimeout(() => { 
                         submissionSuccessMessageElement.classList.add('hidden');
-                        submissionSuccessTextElement.textContent = ''; 
-                    }, 5000);
+                        submissionSuccessTextElement.innerHTML = ''; 
+                    }, 8000); 
 
                 } else {
                     throw new Error(result.message || '提交失敗，請稍後再試。');
@@ -609,17 +608,20 @@
         if(contactInfoInput) {
             contactInfoInput.addEventListener('blur', function() {
                 const contactInfoValue = this.value.trim();
-                clearFieldError('contactInfo'); // Clear previous error on blur
+                clearFieldError('contactInfo'); 
 
                 if (contactInfoValue) { 
                     const phoneRegex = /^09\d{8}$/;
-                    if (!phoneRegex.test(contactInfoValue)) {
-                        showFieldError('contactInfo', '請輸入有效的台灣手機號碼格式 (例如：0912345678)！');
+                    if (!phoneRegex.test(contactInfoValue) || contactInfoValue.length !== 10) { 
+                        showFieldError('contactInfo', '請輸入有效的10碼台灣手機號碼 (例如：0912345678)！');
                     }
                 }
             });
             contactInfoInput.addEventListener('input', function(e) {
                 this.value = this.value.replace(/[^0-9]/g, '');
+                 if (this.value.length > 10) { 
+                    this.value = this.value.slice(0, 10);
+                }
             });
         }
 
