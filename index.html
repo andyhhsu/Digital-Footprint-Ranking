@@ -38,22 +38,22 @@
             transition: background-color 0.2s ease;
         }
         .custom-alert-box button:hover { background-color: #4338CA; }
-        .draw-section {
+        .draw-section { /* 抽獎區塊樣式 */
             margin-top: 1.5rem; 
             padding: 1rem; 
-            border: 1px dashed #F59E0B; 
-            border-radius: 0.375rem; 
-            background-color: #FFFBEB; 
+            border: 1px dashed #F59E0B; /* amber-500 */
+            border-radius: 0.375rem; /* rounded-md */
+            background-color: #FFFBEB; /* amber-50 */
         }
         .draw-section h3 {
             font-size: 1rem; 
             font-weight: 600; 
-            color: #B45309; 
+            color: #B45309; /* amber-700 */
             margin-bottom: 0.5rem; 
         }
         .draw-section p {
             font-size: 0.75rem; 
-            color: #4B5563; 
+            color: #4B5563; /* gray-600 */
             margin-bottom: 0.5rem; 
         }
         .draw-section .checkbox-label {
@@ -64,23 +64,23 @@
         .draw-section input[type="checkbox"] {
             height: 1rem; 
             width: 1rem; 
-            color: #4F46E5; 
-            border-color: #D1D5DB; 
-            border-radius: 0.25rem; 
+            color: #4F46E5; /* indigo-600 */
+            border-color: #D1D5DB; /* gray-300 */
+            border-radius: 0.25rem; /* rounded */
             margin-right: 0.5rem; 
             flex-shrink: 0; 
             margin-top: 0.125rem; 
         }
         .draw-section .checkbox-label label {
             font-size: 0.875rem; 
-            color: #374151; 
+            color: #374151; /* gray-700 */
             line-height: 1.25; 
         }
         .draw-section .contact-label {
             display: block;
             font-size: 0.875rem; 
             font-weight: 500; 
-            color: #374151; 
+            color: #374151; /* gray-700 */
             margin-bottom: 0.25rem; 
         }
         .draw-section input[type="text"] { 
@@ -88,10 +88,9 @@
         }
         .draw-section .hint {
             font-size: 0.75rem; 
-            color: #6B7280; 
+            color: #6B7280; /* gray-500 */
             margin-top: 0.25rem; 
         }
-
     </style>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&display=swap" rel="stylesheet">
 </head>
@@ -165,7 +164,8 @@
                 </fieldset>
 
                 <div class="draw-section">
-                    <h3>🌟 加碼幸運抽獎！</h3> <p>成功提交挑戰者，歡迎參加幸運抽獎！獎品豐富，別錯過！</p>
+                    <h3>🌟 加碼幸運抽獎！</h3>
+                    <p>成功提交挑戰者，歡迎參加幸運抽獎！獎品豐富，別錯過！</p>
                     <div class="checkbox-label">
                         <input id="agreeToDraw" name="agreeToDraw" type="checkbox" class="focus:ring-indigo-500">
                         <label for="agreeToDraw">我已閱讀並同意提供以下手機號碼參加抽獎，並瞭解此資訊僅供本次活動中獎通知使用。</label>
@@ -264,7 +264,7 @@
         const customAlertCloseButton = document.getElementById('customAlertCloseButton');
 
         // --- Configuration ---
-        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzJrS5H6J7JdEHHEvTEVK__JT4Yt0dcvYGPvXC7_tFizNB62W0Z-16YWrZyeGkCC3f53w/exec'; // **已更新為您提供的最新部署ID**
+        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxIsOqBGNsihSt9g1BqtprQBSD462J546_wiXnaN5rGLb8ymktSMRLnAA2sVpTud6kT/exec'; // **已更新為您提供的最新部署ID**
 
         // --- Custom Alert Function ---
         function showAlert(title, message) {
@@ -298,6 +298,7 @@
             submitButton.classList.add('opacity-50', 'cursor-not-allowed');
 
             const formData = new FormData(dataForm);
+            // 重新加入抽獎相關欄位的獲取
             const agreeToDrawChecked = formData.get('agreeToDraw') === 'on'; 
             const contactInfoValue = formData.get('contactInfo') ? formData.get('contactInfo').trim() : '';
 
@@ -308,12 +309,13 @@
                 mostUsedApp: formData.get('mostUsedApp').trim(),
                 appHours: parseInt(formData.get('appHours')) || 0,
                 appMinutes: parseInt(formData.get('appMinutes')) || 0,
+                // 重新加入抽獎相關欄位到 data 物件
                 agreeToDraw: agreeToDrawChecked, 
                 contactInfo: contactInfoValue,   
                 timestamp: new Date().toISOString() 
             };
 
-            // --- 客戶端驗證邏輯 ---
+            // --- 客戶端驗證邏輯 (重新加入抽獎相關驗證) ---
             if (!data.nickname) {
                  showAlert("輸入錯誤", "請輸入您的姓名 / 暱稱！");
                  submitButton.disabled = false;
@@ -321,6 +323,7 @@
                  submitButton.classList.remove('opacity-50', 'cursor-not-allowed');
                  return; 
             }
+            // ... (其他既有驗證保持不變) ...
             if (data.nickname.length > 50) {
                  showAlert("輸入錯誤", "暱稱過長，請限制在50個字元以內！");
                  submitButton.disabled = false;
@@ -371,6 +374,7 @@
                 return;
             }
             
+            // 重新加入抽獎相關驗證
             if (data.agreeToDraw && !data.contactInfo) { 
                 showAlert("輸入錯誤", "若您同意參加抽獎，請填寫您的手機號碼以利中獎通知！");
                 submitButton.disabled = false;
@@ -396,7 +400,7 @@
                 postBody.append('type', 'submitData'); 
                 for (const key in data) {
                     if (data.hasOwnProperty(key)) {
-                        if (typeof data[key] === 'boolean') {
+                        if (typeof data[key] === 'boolean') { // 處理布林值
                             postBody.append(key, data[key] ? 'Y' : 'N'); 
                         } else {
                             postBody.append(key, data[key]);
@@ -428,6 +432,7 @@
 
                 if (result.status === 'success') {
                     let successMessage = '數據提交成功！排行榜將會更新。';
+                    // 重新加入抽獎相關提示
                     if (data.agreeToDraw && data.contactInfo) {
                         successMessage += ' 您已成功參加抽獎！';
                     } else if (data.agreeToDraw && !data.contactInfo) {
