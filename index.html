@@ -39,57 +39,57 @@
         }
         .custom-alert-box button:hover { background-color: #4338CA; }
         .draw-section {
-            margin-top: 1.5rem; /* 24px */
-            padding: 1rem; /* 16px */
-            border: 1px dashed #F59E0B; /* amber-500 */
-            border-radius: 0.375rem; /* rounded-md */
-            background-color: #FFFBEB; /* amber-50 */
+            margin-top: 1.5rem; 
+            padding: 1rem; 
+            border: 1px dashed #F59E0B; 
+            border-radius: 0.375rem; 
+            background-color: #FFFBEB; 
         }
         .draw-section h3 {
-            font-size: 1rem; /* text-md */
-            font-weight: 600; /* font-semibold */
-            color: #B45309; /* amber-700 */
-            margin-bottom: 0.5rem; /* mb-2 */
+            font-size: 1rem; 
+            font-weight: 600; 
+            color: #B45309; 
+            margin-bottom: 0.5rem; 
         }
         .draw-section p {
-            font-size: 0.75rem; /* text-xs */
-            color: #4B5563; /* gray-600 */
-            margin-bottom: 0.5rem; /* mb-2 */
+            font-size: 0.75rem; 
+            color: #4B5563; 
+            margin-bottom: 0.5rem; 
         }
         .draw-section .checkbox-label {
             display: flex;
-            align-items: flex-start; /* Align items to the start for multi-line labels */
-            margin-bottom: 0.5rem; /* mb-2 */
+            align-items: flex-start; 
+            margin-bottom: 0.5rem; 
         }
         .draw-section input[type="checkbox"] {
-            height: 1rem; /* h-4 */
-            width: 1rem; /* w-4 */
-            color: #4F46E5; /* indigo-600 */
-            border-color: #D1D5DB; /* gray-300 */
-            border-radius: 0.25rem; /* rounded */
-            margin-right: 0.5rem; /* mr-2 */
-            flex-shrink: 0; /* Prevent checkbox from shrinking */
-            margin-top: 0.125rem; /* Adjust top margin for better alignment with text */
+            height: 1rem; 
+            width: 1rem; 
+            color: #4F46E5; 
+            border-color: #D1D5DB; 
+            border-radius: 0.25rem; 
+            margin-right: 0.5rem; 
+            flex-shrink: 0; 
+            margin-top: 0.125rem; 
         }
         .draw-section .checkbox-label label {
-            font-size: 0.875rem; /* text-sm */
-            color: #374151; /* gray-700 */
-            line-height: 1.25; /* Add line-height for better readability */
+            font-size: 0.875rem; 
+            color: #374151; 
+            line-height: 1.25; 
         }
         .draw-section .contact-label {
             display: block;
-            font-size: 0.875rem; /* text-sm */
-            font-weight: 500; /* font-medium */
-            color: #374151; /* gray-700 */
-            margin-bottom: 0.25rem; /* mb-1 */
+            font-size: 0.875rem; 
+            font-weight: 500; 
+            color: #374151; 
+            margin-bottom: 0.25rem; 
         }
-        .draw-section input[type="text"] { /* This will style the phone number input */
-            margin-top: 0.25rem; /* mt-1 */
+        .draw-section input[type="text"] { 
+            margin-top: 0.25rem; 
         }
         .draw-section .hint {
-            font-size: 0.75rem; /* text-xs */
-            color: #6B7280; /* gray-500 */
-            margin-top: 0.25rem; /* mt-1 */
+            font-size: 0.75rem; 
+            color: #6B7280; 
+            margin-top: 0.25rem; 
         }
 
     </style>
@@ -246,6 +246,7 @@
     </div>
 
     <script>
+        // --- DOM Elements ---
         const dataForm = document.getElementById('dataForm');
         const submitButton = document.getElementById('submitButton');
         const weeklyAvgLeaderboard = document.getElementById('weeklyAvgLeaderboard');
@@ -256,13 +257,16 @@
         const noDataMostUsed = document.getElementById('noDataMostUsed');
         document.getElementById('currentYear').textContent = new Date().getFullYear();
 
+        // Custom Alert Elements
         const customAlertOverlay = document.getElementById('customAlertOverlay');
         const customAlertTitle = document.getElementById('customAlertTitle');
         const customAlertMessage = document.getElementById('customAlertMessage');
         const customAlertCloseButton = document.getElementById('customAlertCloseButton');
 
-        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw_jMcflIAgXTx7VH_tn5l7upiXvxz8VyWXs3smaUeVoJj9tHUW5NWn0NKPpSdsBqHm/exec'; // 維持您提供的URL
+        // --- Configuration ---
+        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyVND-VKzJDhj-0_wAS6yBavk88iOV6lsHhDkuc1K3Ox2CrLHl6K6uM6E-ZR0VvlcA/exec'; // 已更新為您提供的最新部署ID
 
+        // --- Custom Alert Function ---
         function showAlert(title, message) {
             customAlertTitle.textContent = title;
             customAlertMessage.textContent = message;
@@ -278,6 +282,7 @@
             }
         });
 
+        // --- Helper Functions ---
         function formatTime(totalMinutes) {
             if (totalMinutes === null || typeof totalMinutes === 'undefined' || isNaN(totalMinutes) || totalMinutes < 0) return 'N/A';
             const hours = Math.floor(totalMinutes / 60);
@@ -285,14 +290,15 @@
             return `${hours} 小時 ${minutes} 分鐘`;
         }
         
+        // --- Event Listener for Form Submission ---
         dataForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            submitButton.disabled = true;
+            e.preventDefault(); 
+            submitButton.disabled = true; 
             submitButton.textContent = '提交中...';
             submitButton.classList.add('opacity-50', 'cursor-not-allowed');
 
             const formData = new FormData(dataForm);
-            const agreeToDrawChecked = formData.get('agreeToDraw') === 'on';
+            const agreeToDrawChecked = formData.get('agreeToDraw') === 'on'; 
             const contactInfoValue = formData.get('contactInfo') ? formData.get('contactInfo').trim() : '';
 
             const data = {
@@ -304,16 +310,16 @@
                 appMinutes: parseInt(formData.get('appMinutes')) || 0,
                 agreeToDraw: agreeToDrawChecked, 
                 contactInfo: contactInfoValue,   
-                timestamp: new Date().toISOString()
+                timestamp: new Date().toISOString() 
             };
 
-            // --- 客戶端驗證 ---
+            // --- 客戶端驗證邏輯 ---
             if (!data.nickname) {
                  showAlert("輸入錯誤", "請輸入您的姓名 / 暱稱！");
                  submitButton.disabled = false;
                  submitButton.textContent = '提交挑戰，查看排名！';
                  submitButton.classList.remove('opacity-50', 'cursor-not-allowed');
-                 return;
+                 return; 
             }
             if (data.nickname.length > 50) {
                  showAlert("輸入錯誤", "暱稱過長，請限制在50個字元以內！");
@@ -329,7 +335,7 @@
                 submitButton.classList.remove('opacity-50', 'cursor-not-allowed');
                 return;
             }
-            if ((data.avgWeeklyHours * 60 + data.avgWeeklyMinutes) < 0 ) {
+            if ((data.avgWeeklyHours * 60 + data.avgWeeklyMinutes) < 0 ) { 
                 showAlert("輸入錯誤", "每週平均使用時間總和不能為負數！");
                 submitButton.disabled = false;
                 submitButton.textContent = '提交挑戰，查看排名！';
@@ -357,44 +363,37 @@
                 submitButton.classList.remove('opacity-50', 'cursor-not-allowed');
                 return;
             }
-            if ((data.appHours * 60 + data.appMinutes) < 0) {
+            if ((data.appHours * 60 + data.appMinutes) < 0) { 
                 showAlert("輸入錯誤", "最常用程式的使用時間總和不能為負數！");
                 submitButton.disabled = false;
                 submitButton.textContent = '提交挑戰，查看排名！';
                 submitButton.classList.remove('opacity-50', 'cursor-not-allowed');
                 return;
             }
-            // 抽獎相關驗證
-            if (data.agreeToDraw && !data.contactInfo) {
+            
+            if (data.agreeToDraw && !data.contactInfo) { 
                 showAlert("輸入錯誤", "若您同意參加抽獎，請填寫您的手機號碼以利中獎通知！");
                 submitButton.disabled = false;
                 submitButton.textContent = '提交挑戰，查看排名！';
                 submitButton.classList.remove('opacity-50', 'cursor-not-allowed');
                 return;
             }
-             if (data.contactInfo && !/^\d{8,15}$/.test(data.contactInfo) && !/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/.test(data.contactInfo) ) {
-                 // 簡易的手機號碼 (8-15位數字) 或 Email 格式驗證
-                 // 由於現在只要求手機，可以簡化驗證
-                 if (data.contactInfo && !/^\d{8,15}$/.test(data.contactInfo)) {
-                    showAlert("輸入錯誤", "請輸入有效的手機號碼格式！");
+
+            if (data.contactInfo) { 
+                const phoneRegex = /^09\d{8}$/; 
+                if (!phoneRegex.test(data.contactInfo)) {
+                    showAlert("輸入錯誤", "請輸入有效的台灣手機號碼格式 (例如：0912345678，純數字無符號)！");
                     submitButton.disabled = false;
                     submitButton.textContent = '提交挑戰，查看排名！';
                     submitButton.classList.remove('opacity-50', 'cursor-not-allowed');
                     return;
-                 }
-            }
-            if (data.contactInfo && data.contactInfo.length > 50) { // 調整聯絡資訊長度限制
-                 showAlert("輸入錯誤", "手機號碼過長！");
-                 submitButton.disabled = false;
-                 submitButton.textContent = '提交挑戰，查看排名！';
-                 submitButton.classList.remove('opacity-50', 'cursor-not-allowed');
-                 return;
+                }
             }
             // --- 結束客戶端驗證 ---
             
             try {
                 const postBody = new URLSearchParams();
-                postBody.append('type', 'submitData');
+                postBody.append('type', 'submitData'); 
                 for (const key in data) {
                     if (data.hasOwnProperty(key)) {
                         if (typeof data[key] === 'boolean') {
@@ -408,23 +407,23 @@
                 const response = await fetch(SCRIPT_URL, {
                     method: 'POST',
                     mode: 'cors', 
-                    headers: { 'Content-Type': 'application/x-www-form-urlencoded', },
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded', }, 
                     body: postBody.toString()
                 });
                 
                 const resultText = await response.text();
                 let result;
                 try {
-                    result = JSON.parse(resultText);
+                    result = JSON.parse(resultText); 
                 } catch (e) {
-                    console.error("Response was not JSON:", resultText);
-                    if (!response.ok) {
+                    console.error("Response was not JSON:", resultText); 
+                    if (!response.ok) { 
                          throw new Error(`伺服器錯誤 (HTTP ${response.status})，回應內容非預期。請檢查 Apps Script 記錄。`);
                     }
                     showAlert('提示', '伺服器回應非預期格式，但請求可能已處理。請稍後查看排行榜。');
-                    dataForm.reset();
-                    fetchLeaderboardData();
-                    return;
+                    dataForm.reset(); 
+                    fetchLeaderboardData(); 
+                    return; 
                 }
 
                 if (result.status === 'success') {
@@ -435,14 +434,14 @@
                         successMessage += ' 您同意參加抽獎但未提供手機號碼，將無法收到中獎通知。';
                     }
                     showAlert('成功', successMessage);
-                    dataForm.reset();
-                    fetchLeaderboardData();
+                    dataForm.reset(); 
+                    fetchLeaderboardData(); 
                 } else {
                     throw new Error(result.message || '提交失敗，請稍後再試。');
                 }
             } catch (error) {
-                console.error('Error submitting data:', error);
-                showAlert('提交失敗', `發生錯誤：${error.message}`);
+                console.error('Error submitting data:', error); 
+                showAlert('提交失敗', `發生錯誤：${error.message}`); 
             } finally {
                 submitButton.disabled = false;
                 submitButton.textContent = '提交挑戰，查看排名！';
@@ -450,44 +449,44 @@
             }
         });
 
+        // --- Functions to Fetch and Render Leaderboard Data ---
         async function fetchLeaderboardData() {
-            loadingMessage.style.display = 'block';
-            errorMessage.style.display = 'none';
-            weeklyAvgLeaderboard.innerHTML = ''; 
-            mostUsedAppLeaderboard.innerHTML = ''; 
-            noDataWeekly.style.display = 'none';
-            noDataMostUsed.style.display = 'none';
+            loadingMessage.style.display = 'block'; 
+            errorMessage.style.display = 'none';   
+            weeklyAvgLeaderboard.innerHTML = '';    
+            mostUsedAppLeaderboard.innerHTML = '';  
+            noDataWeekly.style.display = 'none';    
+            noDataMostUsed.style.display = 'none';  
 
             try {
                 const response = await fetch(`${SCRIPT_URL}?action=getLeaderboardData&cacheBust=${new Date().getTime()}`, {
                     method: 'GET',
                     mode: 'cors'
                 });
-                if (!response.ok) {
+                if (!response.ok) { 
                     throw new Error(`HTTP error! status: ${response.status}, 請檢查 Apps Script URL 及部署設定。`);
                 }
-                const data = await response.json();
+                const data = await response.json(); 
 
                 if (data.status === 'success' && data.leaderboards) {
-                    renderLeaderboards(data.leaderboards);
+                    renderLeaderboards(data.leaderboards); 
                 } else {
                     throw new Error(data.message || '無法解析排行榜數據');
                 }
-            } catch (error)
-                {
+            } catch (error) {
                 console.error('Error fetching leaderboard data:', error);
                 errorMessage.textContent = `無法載入排行榜數據：${error.message}`;
-                errorMessage.style.display = 'block';
+                errorMessage.style.display = 'block'; 
             } finally {
-                loadingMessage.style.display = 'none';
+                loadingMessage.style.display = 'none'; 
             }
         }
 
         function renderLeaderboards(leaderboards) {
             if (leaderboards.weeklyAvg && leaderboards.weeklyAvg.length > 0) {
-                noDataWeekly.style.display = 'none';
+                noDataWeekly.style.display = 'none'; 
                 leaderboards.weeklyAvg.forEach((item, index) => {
-                    const row = weeklyAvgLeaderboard.insertRow();
+                    const row = weeklyAvgLeaderboard.insertRow(); 
                     row.innerHTML = `
                         <td class="px-3 sm:px-4 py-3 whitespace-nowrap text-sm font-medium text-gray-900">${index + 1}</td>
                         <td class="px-3 sm:px-4 py-3 whitespace-nowrap text-sm text-gray-700 table-cell-truncate" title="${item.nickname}">${item.nickname}</td>
@@ -495,14 +494,14 @@
                     `;
                 });
             } else {
-                noDataWeekly.style.display = 'block';
-                weeklyAvgLeaderboard.innerHTML = '';
+                noDataWeekly.style.display = 'block'; 
+                weeklyAvgLeaderboard.innerHTML = ''; 
             }
 
             if (leaderboards.mostUsedApp && leaderboards.mostUsedApp.length > 0) {
-                noDataMostUsed.style.display = 'none';
+                noDataMostUsed.style.display = 'none'; 
                 leaderboards.mostUsedApp.forEach((item, index) => {
-                    const row = mostUsedAppLeaderboard.insertRow();
+                    const row = mostUsedAppLeaderboard.insertRow(); 
                     row.innerHTML = `
                         <td class="px-3 sm:px-4 py-3 whitespace-nowrap text-sm font-medium text-gray-900">${index + 1}</td>
                         <td class="px-3 sm:px-4 py-3 whitespace-nowrap text-sm text-gray-700 table-cell-truncate" title="${item.nickname}">${item.nickname}</td>
@@ -511,14 +510,15 @@
                     `;
                 });
             } else {
-                noDataMostUsed.style.display = 'block';
-                mostUsedAppLeaderboard.innerHTML = '';
+                noDataMostUsed.style.display = 'block'; 
+                mostUsedAppLeaderboard.innerHTML = ''; 
             }
         }
 
-        fetchLeaderboardData();
-        // setInterval(fetchLeaderboardData, 30000); 
+        // --- Initial Load ---
+        fetchLeaderboardData(); 
 
+        // --- Privacy Policy Link ---
         document.getElementById('privacyPolicyLink').addEventListener('click', function(e) {
             e.preventDefault();
             showAlert('隱私權政策', '此處應為您的隱私權政策內容。本活動收集的「暱稱」將公開顯示於排行榜，「手機號碼」僅供本次活動中獎通知使用，不會挪作他用或公開。參與活動即表示您同意以上條款。');
